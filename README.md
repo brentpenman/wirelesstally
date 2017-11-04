@@ -2,16 +2,16 @@
 A wireless camera tally system built with Raspberry Pis
 
 
-##Server Configuration:
+## Server Configuration:
 Install screen, dnsmasq, hostapd
 
-###dnsmasq setup:
+### dnsmasq setup:
 
-####/etc/dnsmasq.conf:
+#### /etc/dnsmasq.conf:
 	dhcp-range=10.2.1.2,10.2.1.100,255.255.255.0,24h
 
-###hostapd setup:
-####/etc/hostapd/hostapd.conf:
+### hostapd setup:
+#### /etc/hostapd/hostapd.conf:
 	interface=wlan0
 	ssid=Tally
 	hw_mode=g
@@ -26,10 +26,10 @@ Install screen, dnsmasq, hostapd
 	wpa_pairwise=TKIP
 	rsn_pairwise=CCMP
 
-####/etc/default/hostapd:
+#### /etc/default/hostapd:
 	DAEMON_CONF="/etc/hostapd/hostapd.conf"
 
-###/etc/network/interfaces:
+### /etc/network/interfaces:
 	source-directory /etc/network/interfaces.d
 
 	allow-hotplug wlan0
@@ -38,17 +38,17 @@ Install screen, dnsmasq, hostapd
 	 netmask 255.255.255.0
 	 network 10.2.1.0
 
-###/etc/rc.local
+### /etc/rc.local
 	screen -dmS tally /bin/bash -c "/usr/bin/python /home/pi/server.py"
 
-###/etc/wpa_supplicant/wpa_supplicant.conf
+### /etc/wpa_supplicant/wpa_supplicant.conf
 	#COMMENT OUT ALL LINES
 
-##Client Setup
+## Client Setup
 
 install screen
 
-###/etc/wpa_supplicant/wpa_supplicant.conf:
+### /etc/wpa_supplicant/wpa_supplicant.conf:
 	ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 	update_config=1
 
@@ -59,7 +59,7 @@ install screen
 	}	
 
 
-###/etc/rc.local:
+### /etc/rc.local:
 
 	screen -dmS tally /bin/bash -c "/usr/bin/python /home/pi/client.py"
 	screen -dmS reconnect /home/pi/reconnect.sh
